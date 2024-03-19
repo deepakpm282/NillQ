@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import * as apiClient from '../../api-client';
+import { useAppContext } from '../../contexts/AppContext';
 
 export type RegisterFormData = {
   firstName: string;
@@ -13,6 +14,8 @@ export type RegisterFormData = {
 };
 
 const SignUp: React.FC = () => {
+  const navigate = useNavigate();
+  const { showToast } = useAppContext();
   const {
     register,
     watch,
@@ -22,10 +25,11 @@ const SignUp: React.FC = () => {
 
   const mutation = useMutation(apiClient.register, {
     onSuccess: () => {
-      console.log('Registration Successful');
+      showToast({ message: 'Registration Success!..', type: 'SUCCESS' });
+      navigate('/pages/Dashboard/adminDash');
     },
-    onError: (error: any) => {
-      console.log(error.message);
+    onError: (error: Error) => {
+      showToast({ message: error.message, type: 'ERROR' });
     },
   });
   const onSubmit = handleSubmit((data) => {
@@ -297,7 +301,10 @@ const SignUp: React.FC = () => {
               <div className="mt-6 text-center">
                 <p>
                   Already have an account?{' '}
-                  <Link to="/auth/signin" className="text-primary">
+                  <Link
+                    to="/pages/Authentication/SignIn"
+                    className="text-primary"
+                  >
                     Sign in
                   </Link>
                 </p>

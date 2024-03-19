@@ -7,6 +7,7 @@ import './css/satoshi.css';
 import 'jsvectormap/dist/css/jsvectormap.css';
 import 'flatpickr/dist/flatpickr.min.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { AppContextProvider } from './contexts/AppContext';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,7 +21,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Router>
       <QueryClientProvider client={queryClient}>
-        <App />
+        <AppContextProvider>
+          <App />
+        </AppContextProvider>
       </QueryClientProvider>
     </Router>
   </React.StrictMode>,
