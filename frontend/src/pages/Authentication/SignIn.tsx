@@ -1,7 +1,26 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
 import { Link } from 'react-router-dom';
 
+export type signInFormData = {
+  email: string;
+  password: string;
+};
+
 const SignIn: React.FC = () => {
+  const {
+    register,
+    formState: { errors },
+  } = useForm<signInFormData>();
+
+  const mutation = useMutation(apiClient.signIn, {
+    onSuccess: async () => {
+      //1. Show toast messgae 
+      //2. Navigate to the home page 
+    },
+  });
+
   return (
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="flex flex-wrap items-center">
@@ -15,16 +34,23 @@ const SignIn: React.FC = () => {
 
             <form id="sign_in">
               <div className="mb-4">
-                <label className="mb-2.5 block font-medium text-black dark:text-white">
-                  Email
-                </label>
                 <div className="relative">
                   <input
                     type="email"
+                    autoComplete="email"
                     placeholder="Enter your email"
                     className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    {...register('email', {
+                      required: 'Email is required..',
+                      minLength: {
+                        value: 6,
+                        message: 'Email must be at least 6 characters..',
+                      },
+                    })}
                   />
-
+                  {errors.email && (
+                    <span className="text-red-500">{errors.email.message}</span>
+                  )}
                   <span className="absolute right-4 top-4">
                     <svg
                       className="fill-current"
@@ -45,17 +71,21 @@ const SignIn: React.FC = () => {
                 </div>
               </div>
 
-              <div className="mb-6">
-                <label className="mb-2.5 block font-medium text-black dark:text-white">
-                  Re-type Password
-                </label>
+              <div className="mb-4">
                 <div className="relative">
                   <input
                     type="password"
-                    placeholder="6+ Characters, 1 Capital letter"
+                    placeholder="Enter your password"
                     className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    {...register('password', {
+                      required: 'Password field is required..',
+                    })}
                   />
-
+                  {errors.password && (
+                    <span className="text-red-500">
+                      {errors.password.message}
+                    </span>
+                  )}
                   <span className="absolute right-4 top-4">
                     <svg
                       className="fill-current"
