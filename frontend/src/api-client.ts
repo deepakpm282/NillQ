@@ -1,3 +1,4 @@
+import { signInFormData } from './pages/Authentication/SignIn';
 import { RegisterFormData } from './pages/Authentication/SignUp';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -5,6 +6,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const register = async (formData: RegisterFormData) => {
   const response = await fetch(`${API_BASE_URL}/api/users/register`, {
     method: 'POST',
+    credentials: 'include', // to add http cookie while we are registering
     headers: {
       'Content-Type': 'application/json',
     },
@@ -14,7 +16,33 @@ export const register = async (formData: RegisterFormData) => {
   const responseBody = await response.json();
 
   if (!response.ok) {
-    console.error(responseBody); // Log the responseBody for debugging
-    throw new Error('Registration failed.'); // Throw a generic error
+    throw new Error(responseBody.message);
   }
+};
+
+export const signIn = async (formData: signInFormData) => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  });
+  const body = await response.json();
+  if (!response.ok) {
+    throw new Error(body.message);
+  }
+  return body;
+};
+
+export const validateToken = async () => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
+    credentials: 'include',
+  });
+  if (!response.ok) {
+    throw new Error('Token Invalid');
+  }
+
+  return response.json();
 };

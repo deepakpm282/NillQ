@@ -4,6 +4,7 @@ import { validationResult } from "express-validator";
 import User from "../models/user";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import verifyToken from "../middlewares/auth";
 
 const router = express.Router();
 
@@ -41,6 +42,11 @@ router.post("/login", validate, async (req: Request, res: Response) => {
     console.log(error);
     res.status(500).json({ message: "Something went wrong" });
   }
+});
+
+router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
+  /* here it will check for the cookie */
+  res.status(200).send({ userId: req.userId });
 });
 
 export default router;

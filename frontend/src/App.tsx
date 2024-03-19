@@ -7,7 +7,7 @@ import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
 import Calendar from './pages/Calendar';
 import Chart from './pages/Chart';
-import ECommerce from './pages/Dashboard/ECommerce';
+import Dashboard from './pages/Dashboard/adminDash';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import Tables from './pages/Tables';
@@ -38,8 +38,7 @@ function App() {
           index
           element={
             <>
-              <PageTitle title="NillQ Dashboard" />
-              <ECommerce />
+              <SignUp />
             </>
           }
         />
@@ -67,7 +66,7 @@ function App() {
             </>
           }
         />
-                <Route
+        <Route
           path="/Lists/Doctorlist"
           element={
             <>
@@ -116,7 +115,7 @@ function App() {
           }
         />
         <Route
-          path="/auth/signin"
+          path="/pages/Authentication/SignIn"
           element={
             <>
               <SignIn />
@@ -133,16 +132,22 @@ function App() {
           }
         />
         <Route
-          path="/auth/signup"
+          path="/pages/Authentication/SignUp"
           element={
             <>
               <SignUp />
             </>
           }
         />
+        <Route
+          path="/pages/Dashboard/adminDash"
+          element={
+            <>
+              <Dashboard />
+            </>
+          }
+        />
       </Routes>
-      
-      
     </>
   );
 }
