@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import SidebarLinkGroup from './SidebarLinkGroup';
 import Logo from '../../images/logo/trace.svg';
+import logoutButton from '../logoutButton';
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -512,7 +513,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             </clipPath>
                           </defs>
                         </svg>
-                        Log Out
+                        logout
                       </div>
                     </React.Fragment>
                   );

@@ -59,7 +59,7 @@ const SignUp: React.FC = () => {
                     placeholder="Enter your First name"
                     className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     {...register('firstName', {
-                      required: 'This field is required..',
+                      required: 'This field is required!',
                     })}
                   />
                   {errors.firstName && (
@@ -98,7 +98,7 @@ const SignUp: React.FC = () => {
                     placeholder="Enter your Last name"
                     className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     {...register('lastName', {
-                      required: 'This field is required..',
+                      required: 'This field is required.!',
                     })}
                   />
                   {errors.lastName && (
@@ -138,7 +138,7 @@ const SignUp: React.FC = () => {
                     placeholder="Enter your email"
                     className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     {...register('email', {
-                      required: 'Email is required..',
+                      required: 'Email is required.!',
                       minLength: {
                         value: 6,
                         message: 'Email must be at least 6 characters..',
