@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import * as apiClient from '../../api-client';
 import { useAppContext } from '../../contexts/AppContext';
+import logo from '../../images/logo/login-02.png';
 
 export type RegisterFormData = {
   firstName: string;
@@ -35,29 +36,36 @@ const SignUp: React.FC = () => {
   const onSubmit = handleSubmit((data) => {
     mutation.mutate(data);
   });
+
   return (
     <div
-      className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark w-screen h-screen"
+      className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark"
+      style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}
       onSubmit={onSubmit}
+
     >
-      <div className="flex flex-wrap items-center">
-        <div className="hidden w-full xl:block xl:w-1/2">
-          <div className="py-17.5 px-26 text-center"></div>
+      <div className="flex w-full h-full overflow-hidden"> 
+        <div className=" xl:block xl:w-1/2">
+          <div className="py-10 px-10 text-center bg-blue-600 rounded-full-3xl">
+            <img src={logo} alt="Logo" />
+          </div>
         </div>
 
-        <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
-          <div className="w-full p-2 sm:p-12.5 xl:p-10.5">
-            <h2 className="mb-6 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-              Sign Up to NillQ
-            </h2>
+        <div className="xl:block xl:w-1/2">
+          <div className="w-full h-full p-2 mt-5 sm:p-12.5 xl:p-10.5 flex justify-center items-center overflow-hidden"> 
+            <div className="w-full h-full max-w-md overflow-y-auto"> 
+              <div className="w-full h-full max-w-md">
+                <h2 className="mb-10 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
+                  Sign Up to <span className='text-blue-600'>NillQ</span>
+                </h2>
 
-            <form id="signup_page" action="method">
-              <div className="mb-4">
-                <div className="relative">
-                  <input
+             <form id="signup_page" action="method">
+               <div className="mb-4">
+              <div className="relative">
+                    <input
                     type="text"
                     placeholder="Enter your First name"
-                    className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full rounded-lg border border-stroke bg-transparent py-3 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     {...register('firstName', {
                       required: 'This field is required..',
                     })}
@@ -96,7 +104,7 @@ const SignUp: React.FC = () => {
                   <input
                     type="text"
                     placeholder="Enter your Last name"
-                    className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full rounded-lg border border-stroke bg-transparent py-3 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     {...register('lastName', {
                       required: 'This field is required..',
                     })}
@@ -136,7 +144,7 @@ const SignUp: React.FC = () => {
                     type="email"
                     autoComplete="email"
                     placeholder="Enter your email"
-                    className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full rounded-lg border border-stroke bg-transparent py-3 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     {...register('email', {
                       required: 'Email is required..',
                       minLength: {
@@ -173,7 +181,7 @@ const SignUp: React.FC = () => {
                   <input
                     type="password"
                     placeholder="Enter your password"
-                    className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full rounded-lg border border-stroke bg-transparent py-3 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     {...register('password', {
                       required: 'Password field is required..',
                     })}
@@ -212,7 +220,7 @@ const SignUp: React.FC = () => {
                   <input
                     type="password"
                     placeholder="Re-enter your password"
-                    className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                    className="w-full rounded-lg border border-stroke bg-transparent py-3 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     {...register('confirm_password', {
                       required: 'Confirm password field is required..',
                       validate: (val) => {
@@ -257,11 +265,10 @@ const SignUp: React.FC = () => {
                 <input
                   type="submit"
                   value="Create account"
-                  className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
+                  className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-3 text-white transition hover:bg-opacity-90"
                 />
               </div>
-
-              <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
+              {/* <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
                 <span>
                   <svg
                     width="20"
@@ -295,8 +302,8 @@ const SignUp: React.FC = () => {
                     </defs>
                   </svg>
                 </span>
-                Sign up with Google
-              </button>
+                Sign in with Google
+              </button> */}
 
               <div className="mt-6 text-center">
                 <p>
@@ -310,6 +317,8 @@ const SignUp: React.FC = () => {
                 </p>
               </div>
             </form>
+            </div>
+            </div>
           </div>
         </div>
       </div>
