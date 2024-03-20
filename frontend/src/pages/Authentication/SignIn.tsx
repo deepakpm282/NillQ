@@ -40,18 +40,14 @@ const SignIn: React.FC = () => {
       style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}
       onSubmit={onSubmit}
     >
-      <div className="flex w-full h-full overflow-hidden "> 
-        <div className=" xl:block xl:w-1/2 rounded-r-3xl">
-          <div className="py-10 px-10 text-center bg-blue-600 ">
-            <img src={logo} alt="Logo" />
-          </div>
+      <div className="flex flex-wrap items-center overflow-hidden "> 
+        <div className="hidden w-full xl:block xl:w-1/2 bg-blue-600 rounded-r-3xl">
+            <img src={logo} alt="Logo" />  
         </div>
 
-        <div className="xl:block xl:w-1/2 ">
-          <div className="w-full h-full p-2 mt-25 sm:p-12.5 xl:p-10.5 flex justify-center items-center overflow-hidden"> 
-            <div className="w-full h-full max-w-md overflow-y-auto"> 
-              <div className="w-full h-full max-w-md">
-                <h2 className="mb-10 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
+        <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
+          <div className="w-full p-4 sm:p-12.5 xl:p-17.5 overflow-hidden"> 
+                <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                   Sign In to <span className='text-blue-600'>NillQ</span>
                 </h2>
 
@@ -193,8 +189,6 @@ const SignIn: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
-    </div>
     </div>
   );
 };
