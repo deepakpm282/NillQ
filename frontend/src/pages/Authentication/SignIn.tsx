@@ -1,8 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as apiClient from '../../api-client';
+import { useAppContext } from '../../contexts/AppContext';
 import logo from '../../images/logo/login-02.png'
 
 export type signInFormData = {
@@ -11,6 +12,8 @@ export type signInFormData = {
 };
 
 const SignIn: React.FC = () => {
+  const { showToast } = useAppContext();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -23,11 +26,12 @@ const SignIn: React.FC = () => {
 
   const mutation = useMutation(apiClient.signIn, {
     onSuccess: async () => {
-      //1. Show toast messgae
-      //2. Navigate to the home page
+      showToast({ message: 'Sign in successfull', type: 'SUCCESS' });
+      navigate('/pages/Dashboard/adminDash');
     },
-
-
+    onError: (error: Error) => {
+      showToast({ message: error.message, type: 'ERROR' });
+    },
   });
 
   return (
@@ -35,7 +39,6 @@ const SignIn: React.FC = () => {
       className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark "
       style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}
       onSubmit={onSubmit}
-
     >
       <div className="flex w-full h-full overflow-hidden "> 
         <div className=" xl:block xl:w-1/2 rounded-r-3xl">
@@ -61,7 +64,7 @@ const SignIn: React.FC = () => {
                     placeholder="Enter your email"
                     className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     {...register('email', {
-                      required: 'Email is required..',
+                      required: 'Email is required.!',
                       minLength: {
                         value: 6,
                         message: 'Email must be at least 6 characters..',
@@ -98,7 +101,7 @@ const SignIn: React.FC = () => {
                     placeholder="Enter your password"
                     className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     {...register('password', {
-                      required: 'Password field is required..',
+                      required: 'Password field is required.!',
                     })}
                   />
                   {errors.password && (
