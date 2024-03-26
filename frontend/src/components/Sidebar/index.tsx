@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import SidebarLinkGroup from './SidebarLinkGroup';
 import Logo from '../../images/logo/trace.svg';
-import logoutButton from '../logoutButton';
+import { useAppContext } from '../../contexts/AppContext';
+import { useMutation, useQueryClient } from 'react-query';
+import * as apiClient from '../../api-client';
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -10,6 +12,29 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
+  const LogoutButton = () => {
+    const queryClient = useQueryClient();
+    const { showToast } = useAppContext();
+    const navigate = useNavigate();
+    const mutaion = useMutation(apiClient.signOut, {
+      onSuccess: async () => {
+        await queryClient.invalidateQueries('validateToken');
+        showToast({ message: 'Signed out', type: 'SUCCESS' });
+        navigate('/');
+      },
+      onError: (error: Error) => {
+        showToast({ message: error.message, type: 'ERROR' });
+      },
+    });
+    const handleClick = () => {
+      mutaion.mutate();
+    };
+    return (
+      <button onClick={handleClick} className="text-white bg-transparent">
+        Logout
+      </button>
+    );
+  };
   const location = useLocation();
   const { pathname } = location;
 
@@ -155,7 +180,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             fill=""
                           />
                         </svg>
-                        <NavLink to="/">Dashboard</NavLink>
+                        <NavLink to="">Dashboard</NavLink>
                       </NavLink>
                       {/* <!-- Dropdown Menu Start --> */}
 
@@ -513,7 +538,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             </clipPath>
                           </defs>
                         </svg>
-                        logout
+                        <LogoutButton />
                       </div>
                     </React.Fragment>
                   );
