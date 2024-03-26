@@ -5,6 +5,7 @@ import Logo from '../../images/logo/trace.svg';
 import { useAppContext } from '../../contexts/AppContext';
 import { useMutation, useQueryClient } from 'react-query';
 import * as apiClient from '../../api-client';
+import logo from '../../images/nillq-favicon-white.png'
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -89,10 +90,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       }`}
     >
       {/* <!-- SIDEBAR HEADER --> */}
-      {/* <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-        <NavLink to="/">
-          <img src={Logo} alt="Logo" />
-        </NavLink>
+      <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
+        <div className='flex justify-center gap-2 text-white mt-3'>
+          <img src={logo} alt='Logo' className='size-[30px] ml-3'/>
+          <div className='text-2xl font-bold pb-1'>NillQ</div>
+        </div>
 
         <button
           ref={trigger}
@@ -115,13 +117,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             />
           </svg>
         </button>
-      </div> */}
-      {/* <!-- SIDEBAR HEADER --> */}
-      <div className="flex justify-center gap-6 pt-7">
-        <h1>Loo</h1>
-        <h2>NillQ</h2>
       </div>
-
+      {/* <!-- SIDEBAR HEADER --> */}
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         {/* <!-- Sidebar Menu --> */}
         <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
@@ -180,7 +177,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             fill=""
                           />
                         </svg>
-                        <NavLink to="">Dashboard</NavLink>
+                        <NavLink to="/pages/Dashboard/adminDash">Dashboard</NavLink>
                       </NavLink>
                       {/* <!-- Dropdown Menu Start --> */}
 
