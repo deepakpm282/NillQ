@@ -1,4 +1,6 @@
 **/.env
+**/.env.e2e
+**/.dist
 
 # Logs
 **/logs

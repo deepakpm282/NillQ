@@ -37,23 +37,23 @@ router.post("/login", validate, async (req: Request, res: Response) => {
       secure: process.env.NODE_ENV === "production",
       maxAge: 86400000,
     });
-    res.status(200).json({ userId: user._id });
+    res.status(200).json({ Token: token });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Something went wrong" });
   }
 });
 
-router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
+router.post("/validate-token", verifyToken, (req: Request, res: Response) => {
   /* here it will check for the cookie */
-  res.status(200).send({ userId: req.userId });
+  res.status(200).send({ message: "Token valid", userId: req.userId });
 });
 
 router.post("/logout", (req: Request, res: Response) => {
   res.cookie("auth_token", "", {
     expires: new Date(0),
   });
-  res.send();
+  res.send({ message: "User Signed Out" });
 });
 
 export default router;

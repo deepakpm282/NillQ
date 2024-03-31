@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import userRoute from "./routes/users";
 import authRoute from "./routes/auth";
 import cookieParser from "cookie-parser"; /*Here we have to install a package "npm i --save-dev @types/cookie-parser" */
+import path from "path";
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
 
@@ -18,6 +19,8 @@ app.use(
     credentials: true, // Allow credentials such as cookies, authorization headers, etc.
   })
 );
+
+app.use(express.static(path.join(__dirname,"../../frontend/dist")));
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
